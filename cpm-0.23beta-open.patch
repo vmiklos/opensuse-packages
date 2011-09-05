@@ -1,0 +1,29 @@
+open() takes three arguments when used with O_CREAT.
+Furthermore, opening "/dev/null" and unsuccessfully creating it if it does
+not exist and assuming everything's ok in that case makes no sense either.
+Fix the test to be a bit more sane.
+
+Lubomir Rintel <lkundrak@v3.sk>
+
+diff -up cpm-0.23beta/security.c.open cpm-0.23beta/security.c
+--- cpm-0.23beta/security.c.open	2009-01-08 16:45:49.000000000 +0100
++++ cpm-0.23beta/security.c	2009-01-08 16:46:54.000000000 +0100
+@@ -495,15 +495,13 @@ int initSecurity(int* max_mem_lock, int*
+     /* check that stderr, stdin and stdout are opened */
+     /* NOTE: no file must be opened before this test! */
+     /* Flawfinder: ignore */
+-    canary = open("/dev/null", O_CREAT);
+-    if ((canary >= 0) && (canary <= 2))
++    close (canary = dup(0));
++    if (canary != 3)
+       {
+         fprintf(stderr, "%s\n",
+             _("stdin, stdout and/or stderr are invalid."));
+-        close (canary);
+         return 1;
+       }
+-    close (canary);
+ 
+     return clearEnvironment();
+   }
+

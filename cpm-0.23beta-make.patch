@@ -1,0 +1,14 @@
+Marek Mahut <mmahut@fedoraproject.org>: We are setuid-ing it using rpm
+
+diff -Naur cpm-0.23beta-upstream/Makefile.in cpm-0.23beta/Makefile.in
+--- cpm-0.23beta-upstream/Makefile.in	2009-01-05 15:24:31.000000000 +0100
++++ cpm-0.23beta/Makefile.in	2009-01-05 15:57:40.000000000 +0100
+@@ -374,7 +374,7 @@
+ # install everything
+ .PHONY: install
+ install: cpm gettext
+-	$(INSTALL) -D --mode=4755 --owner=root --group=root @PACKAGE_NAME@ $(DESTDIR)$(bindir)/@PACKAGE_NAME@
++	$(INSTALL) -D --mode=755 @PACKAGE_NAME@ $(DESTDIR)$(bindir)/@PACKAGE_NAME@
+ 	$(INSTALL) -D --mode=644 ./po/de_DE.mo $(DESTDIR)$(localedir)/de/LC_MESSAGES/@PACKAGE_NAME@.mo
+ 	$(INSTALL) -D --mode=644 ./docs/cpm.1.gz $(DESTDIR)$(mandir)/man1/cpm.1.gz
+ 

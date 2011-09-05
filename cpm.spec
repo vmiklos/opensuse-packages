@@ -20,13 +20,19 @@ Name:           cpm
 Version:        0.23beta
 Release:        1
 Summary:        Console Password Manager
-
+Group:          Productivity/Security
 License:        GPLv2+
 URL:            http://www.harry-b.de/dokuwiki/doku.php?id=harry:cpm
 Source0:        http://downloads.sourceforge.net/passwordms/cpm-0.23beta.tar.gz
+Source1:        permissions
+Source2:        permissions.easy
+Source3:        %{name}-rpmlintrc
+Patch0:         cpm-0.23beta-open.patch
+Patch1:         cpm-0.23beta-make.patch
 
-BuildRequires:  ncurses-devel libxml2-devel dotconf-devel cracklib-devel gpgme-devel cdk-devel
-Requires:       
+BuildRequires:  ncurses-devel libxml2-devel dotconf-devel cracklib-devel
+BuildRequires:  cracklib-dict-full gpgme-devel cdk-devel
+PreReq:         permissions
 # BuildArch:      noarch
 
 %description
@@ -38,6 +44,8 @@ it's even possible to reuse the data for some other purpose.
 
 %prep
 %setup -q -n %{name}-%{version}
+%patch0 -p1
+%patch1 -p1
 sed -i 's,diff -u current.txt new.txt,diff -u current.txt new.txt || :,' Makefile.in
 
 %build
@@ -45,18 +53,27 @@ sed -i 's,diff -u current.txt new.txt,diff -u current.txt new.txt || :,' Makefil
 make %{?_smp_mflags}
 
 %install
-make install DESTDIR=%{buildroot}
-install -D -p -m 644 conf/cpmrc-default %{buildroot}%{_sysconfdir}/cpmrc
+make install DESTDIR=%{buildroot} mandir="%{_mandir}"
+%__install -D -m 644 conf/cpmrc-default %{buildroot}%{_sysconfdir}/cpmrc
 %{find_lang} cpm
+%__install -D -m 644 %{S:1} %{buildroot}%{_sysconfdir}/permissions.d/%{name}
+%__install -m 644 %{S:2} %{buildroot}%{_sysconfdir}/permissions.d/%{name}.easy
 
 %clean
 rm -rf %{buildroot}
 
-%files
+%post
+%set_permissions %{_bindir}/cpm
+
+%verifyscript
+%verify_permissions -e %{_bindir}/cpm
+
+%files -f cpm.lang
 %defattr(-,root,root,-)
 %config(noreplace) %{_sysconfdir}/cpmrc
-%attr (4755,root,root) %{_bindir}/cpm
+%{_sysconfdir}/permissions.d/*
+%verify(not mode) %attr (4755,root,root) %{_bindir}/cpm
 %doc docs/*
-%{_mandir}/man1/cpm*
+%{_mandir}/man1/*
 
 %changelog
