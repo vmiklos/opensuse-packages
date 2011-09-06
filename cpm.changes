@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Tue Sep  6 02:08:51 CEST 2011 - vmiklos@frugalware.org
+
+- Fix x86_64 build as well
+
+-------------------------------------------------------------------
 Tue Sep  6 01:54:56 CEST 2011 - vmiklos@frugalware.org
 
 - Fix build

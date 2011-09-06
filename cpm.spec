@@ -49,7 +49,7 @@ it's even possible to reuse the data for some other purpose.
 sed -i 's,diff -u current.txt new.txt,diff -u current.txt new.txt || :,' Makefile.in
 
 %build
-%configure --with-crack-dict=%{_libdir}/cracklib_dict
+%configure --with-crack-dict=/usr/lib/cracklib_dict
 make %{?_smp_mflags}
 
 %install
