@@ -18,7 +18,7 @@
 
 Name:           cpm
 Version:        0.23beta
-Release:        1
+Release:        2
 Summary:        Console Password Manager
 Group:          Productivity/Security
 License:        GPLv2+
@@ -71,7 +71,7 @@ rm -rf %{buildroot}
 %files -f cpm.lang
 %defattr(-,root,root,-)
 %config(noreplace) %{_sysconfdir}/cpmrc
-%{_sysconfdir}/permissions.d/*
+%config(noreplace) %{_sysconfdir}/permissions.d/*
 %verify(not mode) %attr (4755,root,root) %{_bindir}/cpm
 %doc docs/*
 %{_mandir}/man1/*

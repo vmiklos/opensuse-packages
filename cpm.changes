@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Wed Sep  7 11:30:27 CEST 2011 - vmiklos@frugalware.org
+
+- non-conffile-in-etc fixes
+
+-------------------------------------------------------------------
 Tue Sep  6 02:08:51 CEST 2011 - vmiklos@frugalware.org
 
 - Fix x86_64 build as well
