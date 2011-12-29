@@ -1,0 +1,17 @@
+diff --git a/getweb.in b/getweb.in
+index c3d7abf..634eda9 100755
+--- a/getweb.in
++++ b/getweb.in
+@@ -131,10 +133,11 @@ gettgz() {
+     file="$2"
+     what="$3"
+     
++    if [ ! -e $file ]; then
+     wget $WGETOPTS -O $file "$url/$file" ||
+ 	error "Couldn't download $url/$file"
++    fi
+     gunzip <$file | tar xvf - $what
+-    rm $file
+ }
+ 
+ copyright() {
