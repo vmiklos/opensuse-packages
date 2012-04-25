@@ -47,6 +47,7 @@ it's even possible to reuse the data for some other purpose.
 %patch0 -p1
 %patch1 -p1
 sed -i 's,diff -u current.txt new.txt,diff -u current.txt new.txt || :,' Makefile.in
+sed -i 's,-Wall,-Wall -fPIE,;s,^LDFLAGS=,LDFLAGS=-pie ,' Makefile.in
 
 %build
 %configure --with-crack-dict=/usr/lib/cracklib_dict
