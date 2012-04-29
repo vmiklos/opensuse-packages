@@ -1,0 +1,38 @@
+diff --git a/Makefile b/Makefile
+index 1b31aab..e172a0c 100644
+--- a/Makefile
++++ b/Makefile
+@@ -1371,7 +1371,9 @@ man-icc2ps:
+ 	cd icc2ps; $(MAKE) man
+ 
+ man-osx-hotplug:
++ifeq ($(UNAME),Darwin)
+ 	cd osx-hotplug; $(MAKE) man
++endif
+ 
+ .1in.1: 
+ 	-rm -f $*.1
+@@ -1442,17 +1444,21 @@ install-doc: doc
+ 	$(INSTALL) -c -m 644 manual.pdf $(DOCDIR)
+ 	$(INSTALL) -c -m 644 COPYING $(DOCDIR)
+ 	$(INSTALL) -c -m 644 INSTALL $(DOCDIR)
++ifeq ($(UNAME),Darwin)
+ 	$(INSTALL) -c -m 644 INSTALL.osx $(DOCDIR)
++endif
+ 	$(INSTALL) -c -m 644 README $(DOCDIR)
+ 	$(INSTALL) -c -m 644 ChangeLog $(DOCDIR)
+ 
+ GROFF=/usr/local/test/bin/groff
+ GROFF=groff
+-manual.pdf: $(MANPAGES) icc2ps/foo2zjs-icc2ps.1 osx-hotplug/osx-hplj-hotplug.1
++ifeq ($(UNAME),Darwin)
++MANPAGES += osx-hotplug/osx-hplj-hotplug.1
++endif
++manual.pdf: $(MANPAGES) icc2ps/foo2zjs-icc2ps.1
+ 	-$(GROFF) -t -man \
+ 	    `ls $(MANPAGES) \
+ 		icc2ps/foo2zjs-icc2ps.1 \
+-		osx-hotplug/osx-hplj-hotplug.1 \
+ 		| sort` \
+ 	    | ps2pdf - $@
+ 

@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Sun Apr 29 14:31:44 UTC 2012 - vmiklos@suse.com
+
+- disable build of OSX documentation 
+
+-------------------------------------------------------------------
 Sun Apr 29 14:15:53 UTC 2012 - vmiklos@suse.com
 
 - build command2foo2lava-pjl

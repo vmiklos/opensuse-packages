@@ -49,6 +49,7 @@ Source22:       http://foo2hiperc.rkkda.com/icm/okic310.tar.gz
 # Don't try to fetch firmware when we already have it.
 Patch0:         disable-fetch.diff
 Patch1:         cups-destdir.diff
+Patch2:         no-osx.diff
 
 Requires:       ghostscript-x11 foomatic-filters
 BuildRequires:  ghostscript-x11 foomatic-filters wget bc cups-devel
@@ -66,6 +67,7 @@ or HP LaserJet Pro CP1025nw or HP LaserJet Pro P1566
 cp $RPM_SOURCE_DIR/*.tar.gz .
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 make %{?_smp_mflags}
