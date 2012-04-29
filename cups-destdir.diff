@@ -1,0 +1,14 @@
+diff --git a/Makefile b/Makefile
+index 1b31aab..9ca4927 100644
+--- a/Makefile
++++ b/Makefile
+@@ -993,7 +993,8 @@ install-hotplug-osx:
+ 
+ install-filter:
+ 	if [ "$(CUPS_SERVERBIN)" != "" ]; then \
+-	    ln -sf $(BIN)/command2foo2lava-pjl $(CUPS_SERVERBIN)/filter/; \
++	    mkdir -p $(DESTDIR)$(CUPS_SERVERBIN)/filter/; \
++	    ln -sf /usr/bin/command2foo2lava-pjl $(DESTDIR)$(CUPS_SERVERBIN)/filter/; \
+ 	fi
+ 
+ CUPSDCONF=/etc/cups/cupsd.conf

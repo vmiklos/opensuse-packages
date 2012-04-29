@@ -47,10 +47,11 @@ Source20:       http://foo2hiperc.rkkda.com/icm/okic3400.tar.gz
 Source21:       http://foo2hiperc.rkkda.com/icm/okic5600.tar.gz
 Source22:       http://foo2hiperc.rkkda.com/icm/okic310.tar.gz
 # Don't try to fetch firmware when we already have it.
-Patch:          disable-fetch.diff
+Patch0:         disable-fetch.diff
+Patch1:         cups-destdir.diff
 
-Requires:       cups ghostscript-x11 foomatic-filters
-BuildRequires:  ghostscript-x11 foomatic-filters wget bc
+Requires:       ghostscript-x11 foomatic-filters
+BuildRequires:  ghostscript-x11 foomatic-filters wget bc cups-devel
 # BuildArch:      noarch
 
 %description
@@ -63,7 +64,8 @@ or HP LaserJet Pro CP1025nw or HP LaserJet Pro P1566
 %prep
 %setup -q -n %{name}
 cp $RPM_SOURCE_DIR/*.tar.gz .
-%patch -p1
+%patch0 -p1
+%patch1 -p1
 
 %build
 make %{?_smp_mflags}
@@ -98,6 +100,8 @@ rm -rf %{buildroot}
 %{_datadir}/foo2slx/icm/*
 %{_datadir}/foo2xqx/firmware/*
 %{_datadir}/cups/model/*
+/usr/lib/cups/filter/*
+%dir /usr/lib/cups/filter
 %dir %{_datadir}/doc/foo2zjs
 %dir %{_datadir}/foo2qpdl
 %dir %{_datadir}/foo2qpdl/crd
