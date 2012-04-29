@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Sun Apr 29 22:06:14 UTC 2012 - vmiklos@suse.com
+
+- get rid of a few non-redistributable files 
+
+-------------------------------------------------------------------
 Sun Apr 29 15:17:44 UTC 2012 - vmiklos@suse.com
 
 - update to 2012_02_23 

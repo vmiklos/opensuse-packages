@@ -57,10 +57,8 @@ BuildRequires:  ghostscript-x11 foomatic-filters wget bc cups-devel
 
 %description
 foo2zjs is an open source printer driver for printers that use the
-Zenographics ZjStream wire protocol for their print data, such as the
-Minolta/QMS magicolor 2300 DL or Konica Minolta magicolor 2430 DL or
-HP LaserJet 1020 or HP LaserJet Pro P1102 or HP LaserJet Pro P1102w
-or HP LaserJet Pro CP1025nw or HP LaserJet Pro P1566
+Zenographics ZjStream wire protocol for their print data, such as HP LaserJet
+Pro P1566.
 
 %prep
 %setup -q -n %{name}
@@ -82,6 +80,15 @@ ln -sf %{_datadir}/foo2zjs/icm/km2430_1.icm %{buildroot}%{_datadir}/foo2hp/icm/k
 ln -sf %{_datadir}/foo2oak/icm/hpclj2600n-0.icm %{buildroot}%{_datadir}/foo2hp/icm/hpclj2600n-0.icm
 ln -sf %{_datadir}/foo2hp/icm/hpclj2600n-1.icm %{buildroot}%{_datadir}/foo2oak/icm/hpclj2600n-1.icm
 ln -sf %{_datadir}/foo2zjs/icm/km2430_2.icm %{buildroot}%{_datadir}/foo2hp/icm/km2430_2.icm
+# Avoid non-redistributable files
+find %{buildroot} -name hpclj2600n-1.icm \
+	-o -name samclp300-0.icm \
+	-o -name km2530-jconner-d50.icm \
+	-o -name hp1215-argyll-0.icm \
+	-o -name samclp315-argyll-0.icm \
+	-o -name km-1600-rgb-392-bpp1.icm \
+	-o -name hp-cp1025-rgb-392-bpp1.icm \
+	-exec rm -v {} \;
 
 %clean
 rm -rf %{buildroot}
