@@ -17,7 +17,7 @@
 # norootforbuild
 
 Name:           foo2zjs
-Version:        2012_06_01
+Version:        2012_09_09
 Release:        1
 Summary:        A linux printer driver for ZjStream protocol
 
@@ -48,7 +48,6 @@ Source21:       http://foo2hiperc.rkkda.com/icm/okic5600.tar.gz
 Source22:       http://foo2hiperc.rkkda.com/icm/okic310.tar.gz
 # Don't try to fetch firmware when we already have it.
 Patch0:         disable-fetch.diff
-Patch1:         cups-destdir.diff
 Patch2:         no-osx.diff
 
 Requires:       ghostscript-x11 foomatic-filters
@@ -64,7 +63,6 @@ Pro P1566.
 %setup -q -n %{name}
 cp $RPM_SOURCE_DIR/*.tar.gz .
 %patch0 -p1
-%patch1 -p1
 %patch2 -p1
 
 %build
@@ -72,8 +70,11 @@ make %{?_smp_mflags}
 ./getweb all
 
 %install
+mkdir -p %{buildroot}$(cups-config --serverbin)/filter
 mkdir -p %{buildroot}%{_datadir}/cups/model
 make install DESTDIR=%{buildroot}
+# Fix broken symlink
+ln -sf /usr/bin/command2foo2lava-pjl %{buildroot}$(cups-config --serverbin)/filter/command2foo2lava-pjl
 # Avoid duplicated files
 ln -sf %{_datadir}/foo2hp/icm/km2430_0.icm %{buildroot}%{_datadir}/foo2zjs/icm/km2430_0.icm
 ln -sf %{_datadir}/foo2zjs/icm/km2430_1.icm %{buildroot}%{_datadir}/foo2hp/icm/km2430_1.icm
