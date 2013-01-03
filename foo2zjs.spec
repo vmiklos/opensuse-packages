@@ -17,7 +17,7 @@
 # norootforbuild
 
 Name:           foo2zjs
-Version:        2012_09_09
+Version:        2013_01_02
 Release:        1
 Summary:        A linux printer driver for ZjStream protocol
 
