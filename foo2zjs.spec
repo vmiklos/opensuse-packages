@@ -17,12 +17,12 @@
 # norootforbuild
 
 Name:           foo2zjs
-Version:        2013_01_14
+Version:        2013_01_22
 Release:        1
 Summary:        A linux printer driver for ZjStream protocol
 Group:          Hardware/Printing
 
-License:        GPL v2 or later
+License:        GPL-2.0+
 URL:            http://foo2zjs.rkkda.com
 Source0:        http://foo2zjs.rkkda.com/foo2zjs.tar.gz
 Source1:        http://foo2zjs.rkkda.com/firmware/sihp1000.tar.gz
