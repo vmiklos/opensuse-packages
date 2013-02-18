@@ -17,7 +17,7 @@
 # norootforbuild
 
 Name:           foo2zjs
-Version:        2013_01_22
+Version:        2013_02_17
 Release:        1
 Summary:        A linux printer driver for ZjStream protocol
 Group:          Hardware/Printing
@@ -92,6 +92,8 @@ find %{buildroot} -name hpclj2600n-1.icm \
 	-o -name km-1600-rgb-392-bpp1.icm \
 	-o -name hp-cp1025-rgb-392-bpp1.icm \
 	-exec rm -v {} \;
+# Avoid unnecessary documentation
+rm -v %{buildroot}%{_datadir}/doc/foo2zjs/INSTALL
 
 %clean
 rm -rf %{buildroot}
