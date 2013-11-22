@@ -17,7 +17,7 @@
 # norootforbuild
 
 Name:           foo2zjs
-Version:        2013_08_13
+Version:        2013_11_18
 Release:        1
 Epoch:          1
 Summary:        A linux printer driver for ZjStream protocol
@@ -49,6 +49,7 @@ Source20:       http://foo2hiperc.rkkda.com/icm/okic3400.tar.gz
 Source21:       http://foo2hiperc.rkkda.com/icm/okic5600.tar.gz
 Source22:       http://foo2hiperc.rkkda.com/icm/okic310.tar.gz
 Source23:       http://foo2hiperc.rkkda.com/icm/okic301.tar.gz
+Source24:       http://foo2hiperc.rkkda.com/icm/okic810.tar.gz
 # Don't try to fetch firmware when we already have it.
 Patch0:         disable-fetch.diff
 Patch2:         no-osx.diff
