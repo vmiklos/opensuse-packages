@@ -24,6 +24,7 @@ Url:            http://cgit.collabora.com/git/gtimelog.git/
 Group:          Productivity/Office/Management
 Source:         http://cgit.collabora.com/git/gtimelog.git/snapshot/gtimelog-0.2.3-gf2be28e.tar.bz2
 BuildRequires:  python-devel python-distribute
+Requires:       python-setuptools
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 %if 0%{?suse_version} && 0%{?suse_version} <= 1110
 %{!?python_sitelib: %global python_sitelib %(python -c "from distutils.sysconfig import get_python_lib; print get_python_lib()")}
