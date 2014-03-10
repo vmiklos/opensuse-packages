@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Mon Mar 10 15:10:23 UTC 2014 - vmiklos@collabora.co.uk
+
+- Missing dependencies, reported by Lubos Lunak.
+
+-------------------------------------------------------------------
 Mon Dec  9 15:18:01 UTC 2013 - vmiklos@collabora.co.uk
 
 - Missing python-setuptools requires, reported by Michael Meeks.
