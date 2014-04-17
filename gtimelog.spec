@@ -22,7 +22,7 @@ License:        GPL-2.0
 Summary:        A Gtk+ time tracking application
 Url:            http://cgit.collabora.com/git/gtimelog.git/
 Group:          Productivity/Office/Management
-Source:         http://cgit.collabora.com/git/gtimelog.git/snapshot/gtimelog-0.2.3-gf2be28e.tar.bz2
+Source:         http://cgit.collabora.com/git/gtimelog.git/snapshot/gtimelog-0.2.3-g563ddf3.tar.bz2
 BuildRequires:  python-devel python-distribute
 Requires:       python-setuptools
 Requires:       typelib-1_0-Gtk-3_0
@@ -48,7 +48,7 @@ Source code: http://code.launchpad.net/gtimelog/
 
 
 %prep
-%setup -q -n gtimelog-%{version}-gf2be28e
+%setup -q -n gtimelog-%{version}-g563ddf3
 
 %build
 python setup.py build
@@ -58,7 +58,7 @@ python setup.py install --prefix=%{_prefix} --root=%{buildroot}
 mkdir -p %{buildroot}/usr/share/pixmaps
 cp src/gtimelog/gtimelog.png %{buildroot}/usr/share/pixmaps
 mkdir -p %{buildroot}/usr/share/applications
-sed -i 's|Categories=Application;Utility|Categories=Office;ProjectManagement;|' gtimelog.desktop
+sed -i 's|Categories=Utility;|Categories=Office;ProjectManagement;|' gtimelog.desktop
 sed -i 's|Icon=gnome-week.png|Icon=gtimelog|' gtimelog.desktop
 cp gtimelog.desktop %{buildroot}/usr/share/applications
 

@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Apr 17 18:40:32 UTC 2014 - vmiklos@collabora.co.uk
+
+- Update to git 563ddf3, see
+  http://cgit.collabora.com/git/gtimelog.git/commit/?h=0.2&id=563ddf3a943beb7c197cae0d834d7177be17d8c6
+  for detailed changes.
+
+-------------------------------------------------------------------
 Mon Mar 10 15:10:23 UTC 2014 - vmiklos@collabora.co.uk
 
 - Missing dependencies, reported by Lubos Lunak.
