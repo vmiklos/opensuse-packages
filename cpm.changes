@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Feb 19 12:49:38 UTC 2015 - werner@suse.de
+
+- Make it build with latest ncurses abd cdk (boo#918553)
+
+-------------------------------------------------------------------
 Wed Apr 25 21:45:36 UTC 2012 - vmiklos@suse.com
 
 - Fix PIE build 

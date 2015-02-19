@@ -1,0 +1,95 @@
+--- configure
++++ configure	2015-02-19 10:09:35.952264552 +0000
+@@ -3341,8 +3341,9 @@ if test "${with_ncurses+set}" = set; the
+       if test -n "${need_dash_r}"; then
+         LDFLAGS="$LDFLAGS -R${withval}/lib"
+       fi
+-
+-
++else
++  CFLAGS="$CFLAGS $(ncursesw6-config --cflags) -D_REENTRANT"
++  CPPFLAGS="$CPPFLAGS $(ncursesw6-config --cflags) -D_REENTRANT"
+ fi
+ 
+ 
+@@ -3355,8 +3356,9 @@ if test "${with_cdk+set}" = set; then
+       if test -n "${need_dash_r}"; then
+         LDFLAGS="$LDFLAGS -R${withval}/lib"
+       fi
+-
+-
++else
++  CFLAGS="$CFLAGS $(cdk5-config --cflags) -D_REENTRANT"
++  CPPFLAGS="$CPPFLAGS $(cdk5-config --cflags) -D_REENTRANT"
+ fi
+ 
+ 
+@@ -3579,7 +3581,7 @@ if test "${ac_cv_lib_ncurses_initscr+set
+   echo $ECHO_N "(cached) $ECHO_C" >&6
+ else
+   ac_check_lib_save_LIBS=$LIBS
+-LIBS="-lncurses  $LIBS"
++LIBS="$(ncursesw6-config --libs) $LIBS"
+ cat >conftest.$ac_ext <<_ACEOF
+ /* confdefs.h.  */
+ _ACEOF
+@@ -3655,7 +3657,7 @@ if test $ac_cv_lib_ncurses_initscr = yes
+ #define HAVE_LIBNCURSES 1
+ _ACEOF
+ 
+-  LIBS="-lncurses $LIBS"
++  LIBS="$(ncursesw6-config --libs) $LIBS"
+ 
+ fi
+ 
+@@ -3671,7 +3673,7 @@ if test "${ac_cv_lib_cdk_initCDKScreen+s
+   echo $ECHO_N "(cached) $ECHO_C" >&6
+ else
+   ac_check_lib_save_LIBS=$LIBS
+-LIBS="-lcdk  $LIBS"
++LIBS="$(cdk5-config --libs)  $LIBS"
+ cat >conftest.$ac_ext <<_ACEOF
+ /* confdefs.h.  */
+ _ACEOF
+@@ -4240,7 +4242,7 @@ if test ${INCOMPATIBLE} -gt 0; then
+   CDK_UNUSABLE=1
+ 
+   # this file only exists in v5
+-  CDK_VERSION_H=`dirname "${CDK_H}"`"/cdk_version.h"
++  CDK_VERSION_H=`dirname "${CDK_H}"`"/cdk/cdk_version.h"
+   if test -f "${CDK_VERSION_H}"; then
+     CDK_VERSION=`grep "CDK_VERSION_PATCH" ${CDK_VERSION_H} | cut -d " " -f 3 | sed -e 's/"//g'`
+     { echo "$as_me:$LINENO: CDK version patch: ${CDK_VERSION}" >&5
+--- interface_gui.c
++++ interface_gui.c	2015-02-19 12:43:57.669704509 +0000
+@@ -1662,7 +1662,7 @@ int initializeScreen(void)
+     assume_default_colors(-1, -1);
+ 
+     /* we do not want any ESC delay */
+-    ESCDELAY = 0;
++    set_escdelay(0);
+ 
+     /* start color mode */
+     initCDKColor();
+--- interface_gui.h
++++ interface_gui.h	2015-02-19 10:01:19.912535220 +0000
+@@ -27,7 +27,7 @@
+ /* #############################################################################
+  * includes
+  */
+-#include <cdk/cdk.h>
++#include <cdk.h>
+ 
+ 
+ /* #############################################################################
+--- options.h
++++ options.h	2015-02-19 10:10:04.616479850 +0000
+@@ -28,7 +28,7 @@
+  * includes
+  */
+ /* we need this for the version info only */
+-#include <cdk/cdk.h>
++#include <cdk.h>
+ 
+ 
+ /* #############################################################################

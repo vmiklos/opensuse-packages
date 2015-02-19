@@ -29,6 +29,7 @@ Source2:        permissions.easy
 Source3:        %{name}-rpmlintrc
 Patch0:         cpm-0.23beta-open.patch
 Patch1:         cpm-0.23beta-make.patch
+Patch2:         configure.diff
 
 BuildRequires:  ncurses-devel libxml2-devel dotconf-devel cracklib-devel
 BuildRequires:  cracklib-dict-full gpgme-devel cdk-devel
@@ -46,10 +47,14 @@ it's even possible to reuse the data for some other purpose.
 %setup -q -n %{name}-%{version}
 %patch0 -p1
 %patch1 -p1
+%patch2 -p0
 sed -i 's,diff -u current.txt new.txt,diff -u current.txt new.txt || :,' Makefile.in
 sed -i 's,-Wall,-Wall -fPIE,;s,^LDFLAGS=,LDFLAGS=-pie ,' Makefile.in
 
 %build
+CFLAGS="$(ncursesw6-config --cflags)"
+LDFLAGS="$(ncursesw6-config --libs)"
+%global optflags    %{optflags} -D_REENTRANT $LDFLAGS $CFLAGS
 %configure --with-crack-dict=/usr/lib/cracklib_dict
 make %{?_smp_mflags}
 
