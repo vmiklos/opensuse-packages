@@ -1,0 +1,11 @@
+--- interface_gui.c
++++ interface_gui.c	2015-02-19 12:43:57.669704509 +0000
+@@ -1662,7 +1662,7 @@ int initializeScreen(void)
+     assume_default_colors(-1, -1);
+ 
+     /* we do not want any ESC delay */
+-    ESCDELAY = 0;
++    set_escdelay(0);
+ 
+     /* start color mode */
+     initCDKColor();

@@ -30,6 +30,7 @@ Source3:        %{name}-rpmlintrc
 Patch0:         cpm-0.23beta-open.patch
 Patch1:         cpm-0.23beta-make.patch
 Patch2:         configure.diff
+Patch3:         escdelay.diff
 
 BuildRequires:  ncurses-devel libxml2-devel dotconf-devel cracklib-devel
 BuildRequires:  cracklib-dict-full gpgme-devel cdk-devel
@@ -47,13 +48,22 @@ it's even possible to reuse the data for some other purpose.
 %setup -q -n %{name}-%{version}
 %patch0 -p1
 %patch1 -p1
+# Can be cleaned up after openSUSE 13.2 EOL.
+%if 0%{?suse_version} > 1320
 %patch2 -p0
+%endif
+%patch3 -p0
 sed -i 's,diff -u current.txt new.txt,diff -u current.txt new.txt || :,' Makefile.in
 sed -i 's,-Wall,-Wall -fPIE,;s,^LDFLAGS=,LDFLAGS=-pie ,' Makefile.in
 
 %build
+%if 0%{?suse_version} > 1320
 CFLAGS="$(ncursesw6-config --cflags)"
 LDFLAGS="$(ncursesw6-config --libs)"
+%else
+CFLAGS="$(ncursesw5-config --cflags)"
+LDFLAGS="$(ncursesw5-config --libs)"
+%endif
 %global optflags    %{optflags} -D_REENTRANT $LDFLAGS $CFLAGS
 %configure --with-crack-dict=/usr/lib/cracklib_dict
 make %{?_smp_mflags}
