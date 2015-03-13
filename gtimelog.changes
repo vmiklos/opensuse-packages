@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Mar 13 17:26:49 UTC 2015 - vmiklos@collabora.co.uk
+
+- Updated to git e0dfc0b.
+- Brings back the GNOME keyring support on openSUSE 13.2.
+
+-------------------------------------------------------------------
 Thu Apr 17 18:40:32 UTC 2014 - vmiklos@collabora.co.uk
 
 - Update to git 563ddf3, see

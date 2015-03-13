@@ -16,13 +16,13 @@
 
 
 Name:           gtimelog
-Version:        0.2.3
+Version:        0.6.0
 Release:        1
 License:        GPL-2.0
 Summary:        A Gtk+ time tracking application
 Url:            http://cgit.collabora.com/git/gtimelog.git/
 Group:          Productivity/Office/Management
-Source:         http://cgit.collabora.com/git/gtimelog.git/snapshot/gtimelog-0.2.3-g563ddf3.tar.bz2
+Source:         http://cgit.collabora.com/git/gtimelog.git/snapshot/gtimelog-0.6.0-ge0dfc0b.tar.bz2
 BuildRequires:  python-devel python-distribute
 Requires:       python-setuptools
 Requires:       typelib-1_0-Gtk-3_0
@@ -48,7 +48,7 @@ Source code: http://code.launchpad.net/gtimelog/
 
 
 %prep
-%setup -q -n gtimelog-%{version}-g563ddf3
+%setup -q -n gtimelog-%{version}-ge0dfc0b
 
 %build
 python setup.py build
