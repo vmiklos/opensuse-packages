@@ -47,7 +47,7 @@
  else
    ac_check_lib_save_LIBS=$LIBS
 -LIBS="-lcdk  $LIBS"
-+LIBS="$(cdk5-config --libs)  $LIBS"
++LIBS="$LIBS  $(cdk5-config --libs)"
  cat >conftest.$ac_ext <<_ACEOF
  /* confdefs.h.  */
  _ACEOF
